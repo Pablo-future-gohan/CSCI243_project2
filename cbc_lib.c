@@ -1,11 +1,16 @@
 ///this will encode and decode a message
-///
+///@author Daniel "Pablo" Popovich
 
 #include "cbc_lib.h"
 #include <stdlib.h>
 #include <stdio.h>
 
+
+#define BITS_PER_BYTE   8L
 #define BYTES_PER_BLOCK sizeof(long)
+#define BITS_PER_BLOCK   (BYTES_PER_BLOCK * BITS_PER_BYTE)
+#define INPUT_SIZE   (24 * BYTES_PER_BLOCK)
+
 
 
 int encode(const char * destpath){
@@ -16,21 +21,65 @@ int decode (const char * sourcepath){
 	return 1;
 }
 
+///this moves the bits to the right and moves the ones that fall off to the right
+///@param block: the block to shift bits in
+///@param count: the amount of bits to shift
+///@return the new block
 static block64 roll_right(block64 block, size_t count){
+
+	//this loops count number of times
+	//it finds the rightmost bit
+	//shifts that bit back 63 positions
+	//shifts the block right once
+	//does a bit | between them to change block
+	for(int i=0; i<count; i++){
+		block64 rightBit = block & 1;
+		rightBit = rightBit<<63;
+		block = block>>1;
+		block = (block | rightBit);
+
+	}
+
+
 	return block;
 }
 
+
+///this moves the bits to the right and moves the ones that fall off to the right
+///@param block: the block to shift bits in
+///@param count: the amount of bits to shift
+///@return the new block
 static block64 roll_left(block64 block, size_t count){
+
+	//this loops count number of times
+	//it finds the leftmost bit
+	//shifts that bit forward 63 positions
+	//shifts the block left once
+	//does a bit | between them to change block
+	for(int i=0; i<count; i++){
+		block64 leftBit = (block >>63) & 1;
+		block = block << 1;
+		block = (block | leftBit);
+	}
+
 	return block;
+
 }
 
 
 static block64 block_cipher_encrypt( block64 block, block64 key){
+
+
+
 	return block;
 }
+
+
 static block64 block_cipher_decrypt( block64 block, block64 key){
 	return block;
 }
+
+
 static void block64_to_string( block64 txt, char * data){
 	printf("");
 }
