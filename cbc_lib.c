@@ -4,7 +4,8 @@
 #include "cbc_lib.h"
 #include <stdlib.h>
 #include <stdio.h>
-
+#include <string.h>
+#include <assert.h>
 
 #define BITS_PER_BYTE   8L
 #define BYTES_PER_BLOCK sizeof(long)
@@ -32,7 +33,7 @@ static block64 roll_right(block64 block, size_t count){
 	//shifts that bit back 63 positions
 	//shifts the block right once
 	//does a bit | between them to change block
-	for(int i=0; i<count; i++){
+	for(size_t i=0; i<count; i++){
 		block64 rightBit = block & 1;
 		rightBit = rightBit<<63;
 		block = block>>1;
@@ -56,7 +57,7 @@ static block64 roll_left(block64 block, size_t count){
 	//shifts that bit forward 63 positions
 	//shifts the block left once
 	//does a bit | between them to change block
-	for(int i=0; i<count; i++){
+	for(size_t i=0; i<count; i++){
 		block64 leftBit = (block >>63) & 1;
 		block = block << 1;
 		block = (block | leftBit);
@@ -100,12 +101,24 @@ static block64 block_cipher_decrypt( block64 block, block64 key){
 }
 
 
+///this turns the plaintext byte sequence into a string with a nul bute at the end
+///@param txt: the plaintext byte
+///@param data the character array to be filled
 static void block64_to_string( block64 txt, char * data){
 
-	printf("");
+	memcpy(data, &txt, 8);
+	data[8]='\0';
 }
 
+///encryptes teh text using the pIV and key
+///@param text: the text to be encrypted
+///@param pIV: initialization vector or ciphertext input to the next stage
+///@param key: key used to encrypt
+///@return pointer to an array of block64
 static block64 * cbc_encrypt( char * text, block64 * pIV, block64 key){
+
+	int numBytes = sizeof(text) %8 +1;
+
 	return pIV;
 }
 static char * cbc_decrypt( block64 * ciphertext, size_t count, block64 * pIV, block64 key) {	
