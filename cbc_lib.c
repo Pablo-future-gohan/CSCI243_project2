@@ -67,20 +67,41 @@ static block64 roll_left(block64 block, size_t count){
 }
 
 
+
+//this encrypts a cipher using a key by left bit rolling first and then xor with key
+//@param block: the block to encrypt
+//@param key: the key to xor the cipher with
+//@return: the encrypted cipher
 static block64 block_cipher_encrypt( block64 block, block64 key){
 
+	for(int i=0; i<4; i++){
+		block = roll_left(block, 10);
+		block = block ^ key;
+	}
 
 
 	return block;
 }
 
 
+//this decryptes a cipher using a key by xoring with the key and then right bit rolling
+//@param block: the block to encrypt
+//@param key: the key to xor the cipher with
+//@return: the encrypted cipher
 static block64 block_cipher_decrypt( block64 block, block64 key){
+	
+	for(int i=0; i<4; i++){
+		block = block ^ key;
+		block = roll_right(block, 10);
+	}
+
+
 	return block;
 }
 
 
 static void block64_to_string( block64 txt, char * data){
+
 	printf("");
 }
 
