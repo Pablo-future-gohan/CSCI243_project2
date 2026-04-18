@@ -13,9 +13,49 @@
 #define INPUT_SIZE   (24 * BYTES_PER_BLOCK)
 
 
+static block64 key = 0x1234DeadBeefCafe; // each hex digit is 4 bits
+static const block64 INITIALIZATION_VECTOR = 0x0L; // initial IV value
+
+
 
 int encode(const char * destpath){
-	return 1;
+	char buffer[1000];
+
+	//this makes sure it can open the file and reads the input from the user
+	FILE * fp = NULL;
+	fp = fopen(destpath, "wb");
+	if(fp==NULL){
+		fprintf(stderr, "%s: No such file or directory\n", destpath);
+		fprintf(stderr, "FAILED\n");
+		return EXIT_FAILURE;
+	}
+
+	if(fgets(buffer, sizeof(buffer), stdin)==NULL){
+		fprintf(stderr, "%s: Permission denied\n", destpath);
+		fprintf(stderr, "FAILED\n");
+		return EXIT_FAILURE;
+	}
+
+
+	//this encodes the message and writes to the file
+	int numBlocks;
+	if(!(strlen(buffer)%8)){
+		 numBlocks = (int) (strlen(buffer)/8);
+	}
+	else{
+		 numBlocks = (int) (strlen(buffer)/8) +1;
+	}
+	block64 pIV = INITIALIZATION_VECTOR;
+
+	block64 *cipher = cbc_encrypt(buffer, numBlocks, &pIV, key);
+	fwrite(cipher, sizeof(block64), numBlocks, fp);
+
+	fprintf(stderr, "ok\n");
+
+	fclose(fp);
+	free(cipher);
+
+	return EXIT_SUCCESS;
 }
 
 int decode (const char * sourcepath){
@@ -133,7 +173,8 @@ static block64 * cbc_encrypt( char * text, block64 * pIV, block64 key){
 	//this loops and encrypts it
 	for(int i=0; i<numBlocks; i++){
 
-		b=0;
+		
+		block64 b=0;
 		char * startPos=text + (i*8);
 
 		if(i!=numBlocks-1){
@@ -172,7 +213,7 @@ static char * cbc_decrypt( block64 * ciphertext, size_t count, block64 * pIV, bl
 
 	char * t = (char *) malloc((count*8 +1)* sizeof(char));
 
-	for(int i=0; i<count; i++){
+	for(size_t i=0; i<count; i++){
 
 		char * startPos=t + (i*8);
 
