@@ -117,10 +117,52 @@ static void block64_to_string( block64 txt, char * data){
 ///@return pointer to an array of block64
 static block64 * cbc_encrypt( char * text, block64 * pIV, block64 key){
 
-	int numBytes = sizeof(text) %8 +1;
 
-	return pIV;
+	int numBlocks;
+
+	//figures out how many blocks there are so it can allocate the right amount
+	if(!(strlen(text)%8)){
+		 numBlocks = (int) (strlen(text)/8);
+	}
+	else{
+		 numBlocks = (int) (strlen(text)/8) +1;
+	}
+	block64 * blockArray = (block64 *) malloc(numBlocks * sizeof(block64));
+
+
+	//this loops and encrypts it
+	for(int i=0; i<numBlocks; i++){
+
+		//I make b just be .'s and fill it with the 
+		b=0x2E2E2E2E2E2E2E2E;
+		char * startPos=text + (i*8);
+
+		if(i!=numBlocks-1){
+			memcpy(&b, startPos, 8);
+		} else{
+			//if the text isn't a multiple of 8 bytes
+			if((strlen(text)%8)){
+				memcpy(&b, startPos, (strlen(text)%8));
+
+			//if the text is a multiple of 8 bytes	
+			} else{
+				memcpy(&b, startPos, 8);
+			}
+		}
+
+		b=b^*pIV;
+		*pIV=block_cipher_encrypt(b, key);
+		blockArray[i]=*pIV;
+
+
+	}
+
+	return blockArray;
 }
+
+
+
+
 static char * cbc_decrypt( block64 * ciphertext, size_t count, block64 * pIV, block64 key) {	
 	char * t = "gofgbijbi";
 	return t;
