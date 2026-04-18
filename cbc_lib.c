@@ -133,8 +133,7 @@ static block64 * cbc_encrypt( char * text, block64 * pIV, block64 key){
 	//this loops and encrypts it
 	for(int i=0; i<numBlocks; i++){
 
-		//I make b just be .'s and fill it with the 
-		b=0x2E2E2E2E2E2E2E2E;
+		b=0;
 		char * startPos=text + (i*8);
 
 		if(i!=numBlocks-1){
@@ -155,6 +154,7 @@ static block64 * cbc_encrypt( char * text, block64 * pIV, block64 key){
 		blockArray[i]=*pIV;
 
 
+
 	}
 
 	return blockArray;
@@ -162,9 +162,37 @@ static block64 * cbc_encrypt( char * text, block64 * pIV, block64 key){
 
 
 
-
+///this decrypts a ciphertext
+///@param ciphertext: what you want to decrypt
+///@param count: the amount of blocks in the ciphertext
+///@param pIV: the initialization vector or ciphertext block
+///@param key: the key to xor with
+///@return the text that was encrypted
 static char * cbc_decrypt( block64 * ciphertext, size_t count, block64 * pIV, block64 key) {	
-	char * t = "gofgbijbi";
+
+	char * t = (char *) malloc((count*8 +1)* sizeof(char));
+
+	for(int i=0; i<count; i++){
+
+		char * startPos=t + (i*8);
+
+		block64 temp = ciphertext[i];
+		block64 future_pIV=ciphertext[i];
+		temp = block_cipher_decrypt(temp, key);
+		temp = temp ^ *pIV;
+
+
+		char tempString[9];
+		block64_to_string(temp, tempString);
+		
+
+		memcpy(startPos, tempString, 8);
+
+		*pIV=future_pIV;
+	}
+	t[count*8]='\0';
+
+
 	return t;
 }
 
