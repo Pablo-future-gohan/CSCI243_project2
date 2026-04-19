@@ -173,11 +173,12 @@ static block64 * cbc_encrypt( char * text, block64 * pIV, block64 key){
 ///@return the text that was encrypted
 static char * cbc_decrypt( block64 * ciphertext, size_t count, block64 * pIV, block64 key) {	
 
-	char * t = (char *) malloc((count*8 +1)* sizeof(char));
+	char * t = (char *) calloc((count*8 +1)* sizeof(char));
 
 
 	if(t == NULL){
 		fprintf(stderr, "Unable to allocate space for array");
+		return EXIT_FAILURE;
 	}
 
 
@@ -209,7 +210,7 @@ static char * cbc_decrypt( block64 * ciphertext, size_t count, block64 * pIV, bl
 
 int encode(const char * destpath){
 	char buffer[1000];
-	char text[10000] = "";
+	char text[50000] = "";
 
 	//this makes sure it can open the file and reads the input from the user
 	FILE * fp = NULL;
@@ -287,6 +288,7 @@ int decode (const char * sourcepath){
 
 	if(numBlocks>0){
 		char * text = cbc_decrypt(cipher, numBlocks, &pIV, key);
+
 		printf("%s", text);
 		free(text);
 	}
