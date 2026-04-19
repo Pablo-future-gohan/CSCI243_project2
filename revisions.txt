@@ -1,3 +1,27 @@
+commit 0e888feb904e5edd30f0f10019a21c0fc5c91dcd
+Author: dp1317-2 <dp1317@g.rit.edu>
+Date:   Sat Apr 18 21:12:10 2026 -0400
+
+    tried to fix reading multiple lines issue
+
+commit 4a015d9b1500c3e0b8742c8dbda5c26b978073ef
+Author: dp1317-2 <dp1317@g.rit.edu>
+Date:   Sat Apr 18 20:53:08 2026 -0400
+
+    push
+
+commit 59e050b55880720101f00a96f2de1ce64b26916d
+Author: dp1317-2 <dp1317@g.rit.edu>
+Date:   Sat Apr 18 20:50:00 2026 -0400
+
+    push
+
+commit 972461f34f93f0400e73223044111d58246384a5
+Author: dp1317-2 <dp1317@g.rit.edu>
+Date:   Sat Apr 18 20:15:21 2026 -0400
+
+    push
+
 commit 068c768e145008fae6e56606a2fef1c82fe65e4a
 Author: dp1317-2 <dp1317@g.rit.edu>
 Date:   Sat Apr 18 20:15:03 2026 -0400
