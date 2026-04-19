@@ -209,6 +209,7 @@ static char * cbc_decrypt( block64 * ciphertext, size_t count, block64 * pIV, bl
 
 int encode(const char * destpath){
 	char buffer[1000];
+	char text[1000] = "";
 
 	//this makes sure it can open the file and reads the input from the user
 	FILE * fp = NULL;
@@ -224,21 +225,19 @@ int encode(const char * destpath){
 
 	
 
+	//I read line by line and add it all into one string
 	while(fgets(buffer, sizeof(buffer), stdin) != NULL){
 
+		strcat(text, buffer);
 
-		block64 pIV = INITIALIZATION_VECTOR;
-
-		int numBlocks = (int) (strlen(buffer)/8) +1;
-
-		block64 *cipher = cbc_encrypt(buffer, &pIV, key);
-
-		fwrite(cipher, sizeof(block64), numBlocks, fp);
-
-
-		free(cipher);
 	}
 
+
+	block64 pIV = INITIALIZATION_VECTOR;
+	int numBlocks = (int) (strlen(text)/8) +1;
+	block64 *cipher = cbc_encrypt(text, &pIV, key);
+	fwrite(cipher, sizeof(block64), numBlocks, fp);
+	free(cipher);
 	
 	fprintf(stderr, "ok\n");
 	fclose(fp);
