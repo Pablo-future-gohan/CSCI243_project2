@@ -208,7 +208,7 @@ static char * cbc_decrypt( block64 * ciphertext, size_t count, block64 * pIV, bl
 
 
 int encode(const char * destpath){
-	char buffer[10000];
+	char buffer[1000];
 	char text[10000] = "";
 
 	//this makes sure it can open the file and reads the input from the user
