@@ -227,15 +227,10 @@ int encode(const char * destpath){
 
 	while(fgets(buffer, sizeof(buffer), stdin) != NULL){
 
-		int numBlocks;
-		if(!(strlen(buffer)%8)){
-			 numBlocks = (int) (strlen(buffer)/8);
-		}
-		else{
-			 numBlocks = (int) (strlen(buffer)/8) +1;
-		}
+		int numBlocks = (int) (strlen(buffer)/8) +1;
 
 		block64 *cipher = cbc_encrypt(buffer, &pIV, key);
+
 		fwrite(cipher, sizeof(block64), numBlocks, fp);
 
 
