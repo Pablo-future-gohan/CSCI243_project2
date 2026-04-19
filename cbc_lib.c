@@ -173,7 +173,7 @@ static block64 * cbc_encrypt( char * text, block64 * pIV, block64 key){
 ///@return the text that was encrypted
 static char * cbc_decrypt( block64 * ciphertext, size_t count, block64 * pIV, block64 key) {	
 
-	char * t = (char *) malloc((count*8 +1)* sizeof(char));
+	char * t = (char *) calloc((count*8 +1), sizeof(char));
 
 
 	if(t == NULL){
