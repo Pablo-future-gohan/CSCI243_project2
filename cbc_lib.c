@@ -140,16 +140,14 @@ static block64 * cbc_encrypt( char * text, block64 * pIV, block64 key){
 		char * startPos=text + (i*8);
 
 		if(i!=numBlocks-1){
+
 			memcpy(&b, startPos, 8);
 		} else{
-			//if the text isn't a multiple of 8 bytes
-			if((strlen(text)%8)){
-				memcpy(&b, startPos, (strlen(text)%8));
-
-			//if the text is a multiple of 8 bytes	
-			} else{
-				memcpy(&b, startPos, 8);
+			int numLeft = strlen(text)%8;
+			if(numLeft==0){
+				numLeft=8;
 			}
+			memcpy(&b, startPos, remaining);
 		}
 
 		b=b^*pIV;
