@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
+#include <errno.h>
 
 #define BITS_PER_BYTE   8L
 #define BYTES_PER_BLOCK sizeof(long)
@@ -18,10 +19,6 @@ static const block64 INITIALIZATION_VECTOR = 0x0L; // initial IV value
 
 
 
-
-int decode (const char * sourcepath){
-	return 1;
-}
 
 ///this moves the bits to the right and moves the ones that fall off to the right
 ///@param block: the block to shift bits in
@@ -207,38 +204,93 @@ int encode(const char * destpath){
 	FILE * fp = NULL;
 	fp = fopen(destpath, "wb");
 	if(fp==NULL){
-		fprintf(stderr, "%s: No such file or directory\n", destpath);
-		fprintf(stderr, "FAILED\n");
-		return EXIT_FAILURE;
-	}
-
-	if(fgets(buffer, sizeof(buffer), stdin)==NULL){
-		fprintf(stderr, "%s: Permission denied\n", destpath);
+		fprintf(stderr, "%s: %s\n", destpath, strerror(errno));
 		fprintf(stderr, "FAILED\n");
 		return EXIT_FAILURE;
 	}
 
 
-	//this encodes the message and writes to the file
-	int numBlocks;
-	if(!(strlen(buffer)%8)){
-		 numBlocks = (int) (strlen(buffer)/8);
-	}
-	else{
-		 numBlocks = (int) (strlen(buffer)/8) +1;
-	}
+
 	block64 pIV = INITIALIZATION_VECTOR;
 
-	block64 *cipher = cbc_encrypt(buffer, &pIV, key);
-	fwrite(cipher, sizeof(block64), numBlocks, fp);
+	
 
+	while(fgets(buffer, sizeof(buffer), stdin) != NULL){
+
+		int numBlocks;
+		if(!(strlen(buffer)%8)){
+			 numBlocks = (int) (strlen(buffer)/8);
+		}
+		else{
+			 numBlocks = (int) (strlen(buffer)/8) +1;
+		}
+
+		block64 *cipher = cbc_encrypt(buffer, &pIV, key);
+		fwrite(cipher, sizeof(block64), numBlocks, fp);
+
+
+		free(cipher);
+	}
+
+	
 	fprintf(stderr, "ok\n");
-
 	fclose(fp);
-	free(cipher);
-
 	return EXIT_SUCCESS;
 }
 
+
+
+
+int decode (const char * sourcepath){
+	FILE * fp = NULL;
+	fp = fopen(sourcepath, "rb");
+
+	if(fp==NULL){
+		fprintf(stderr, "%s: %s\n", sourcepath, strerror(errno));
+		fprintf(stderr, "FAILED\n");
+		return EXIT_FAILURE;
+	}
+
+
+	block64 * cipher = NULL;
+	block64 temp;
+	int numBlocks=0;
+
+	//I loop through the file and read one block at a time
+	//I change the ciphers size accordingly using realloc
+	//and I put the block I read into the cipher
+	while(fread(&temp, sizeof(block64), 1, fp)){
+		numBlocks++;
+
+		block64 * blockCipher = realloc(cipher, numBlocks * sizeof(block64));
+		if(blockCipher==NULL){
+			fprintf(stderr, "Memory not allocated");
+			free(cipher);
+			free(blockCipher);
+			fclose(fp);
+			return EXIT_FAILURE;
+		}
+
+		cipher = blockCipher;
+		cipher[numBlocks-1]=temp;
+	}
+
+
+
+	block64 pIV = INITIALIZATION_VECTOR;
+
+	if(numBlocks>0){
+		char * text = cbc_decrypt(cipher, numBlocks, &pIV, key);
+		printf("%s", text);
+		free(text);
+	}
+
+	free(cipher);
+
+
+	fprintf(stderr, "ok\n");
+	fclose(fp);
+	return EXIT_SUCCESS;
+}
 
 
