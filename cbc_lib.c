@@ -147,7 +147,7 @@ static block64 * cbc_encrypt( char * text, block64 * pIV, block64 key){
 			if(numLeft==0){
 				numLeft=8;
 			}
-			memcpy(&b, startPos, remaining);
+			memcpy(&b, startPos, numLeft);
 		}
 
 		b=b^*pIV;
