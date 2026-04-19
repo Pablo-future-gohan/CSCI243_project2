@@ -167,7 +167,7 @@ static block64 * cbc_encrypt( char * text, block64 * pIV, block64 key){
 ///@return the text that was encrypted
 static char * cbc_decrypt( block64 * ciphertext, size_t count, block64 * pIV, block64 key) {	
 
-	char * t = (char *) calloc((count*8 +1), sizeof(char));
+	char * t = (char *) malloc((count*8 +1)* sizeof(char));
 
 
 	if(t == NULL){
@@ -176,6 +176,8 @@ static char * cbc_decrypt( block64 * ciphertext, size_t count, block64 * pIV, bl
 	}
 
 
+
+	//loops through each block and deciphers it
 	for(size_t i=0; i<count; i++){
 
 		char * startPos=t + (i*8);
@@ -217,14 +219,9 @@ int encode(const char * destpath){
 
 
 
-
-	
-
 	//I read line by line and add it all into one string
 	while(fgets(buffer, sizeof(buffer), stdin) != NULL){
-
 		strcat(text, buffer);
-
 	}
 
 
@@ -247,6 +244,7 @@ int decode (const char * sourcepath){
 	FILE * fp = NULL;
 	fp = fopen(sourcepath, "rb");
 
+	//check if the file can open
 	if(fp==NULL){
 		fprintf(stderr, "%s: %s\n", sourcepath, strerror(errno));
 		fprintf(stderr, "FAILED\n");
@@ -281,9 +279,9 @@ int decode (const char * sourcepath){
 
 	block64 pIV = INITIALIZATION_VECTOR;
 
+
 	if(numBlocks>0){
 		char * text = cbc_decrypt(cipher, numBlocks, &pIV, key);
-
 		printf("%s", text);
 		free(text);
 	}

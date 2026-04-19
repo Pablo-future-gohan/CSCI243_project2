@@ -6,6 +6,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+
+///this decodes whatever is in the file the user wants decoded
+///@param argc: the amount of arguments
+///@param agrv: the file to write to
+///@return success or failure
 int main(int argc, char * argv[]){
 
 
