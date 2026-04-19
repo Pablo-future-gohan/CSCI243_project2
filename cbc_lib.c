@@ -119,12 +119,8 @@ static block64 * cbc_encrypt( char * text, block64 * pIV, block64 key){
 	int numBlocks;
 
 	//figures out how many blocks there are so it can allocate the right amount
-	if(!(strlen(text)%8)){
-		 numBlocks = (int) (strlen(text)/8);
-	}
-	else{
-		 numBlocks = (int) (strlen(text)/8) +1;
-	}
+	numBlocks= (int)(strlen(text)/8)+1;
+	
 	block64 * blockArray = (block64 *) malloc(numBlocks * sizeof(block64));
 
 	if(blockArray == NULL){
@@ -234,6 +230,7 @@ int encode(const char * destpath){
 
 	block64 pIV = INITIALIZATION_VECTOR;
 	int numBlocks = (int) (strlen(text)/8) +1;
+
 	block64 *cipher = cbc_encrypt(text, &pIV, key);
 	fwrite(cipher, sizeof(block64), numBlocks, fp);
 	free(cipher);
