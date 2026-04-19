@@ -1,3 +1,69 @@
+commit 5bce9d94e3c489e779f376032d77983d54444726
+Author: dp1317-2 <dp1317@g.rit.edu>
+Date:   Sat Apr 18 22:18:46 2026 -0400
+
+    some final documentation
+
+commit cad9a4c6e09a648318fefce5bc8b226c67c25078
+Author: dp1317-2 <dp1317@g.rit.edu>
+Date:   Sat Apr 18 22:08:14 2026 -0400
+
+    push
+
+commit 6beaf3e3c3538dd4f8af4d856b833b44e137ad8e
+Author: dp1317-2 <dp1317@g.rit.edu>
+Date:   Sat Apr 18 22:00:51 2026 -0400
+
+    push
+
+commit d102f4263af92eba7a25f3e23f894ca130b6d7dd
+Author: dp1317-2 <dp1317@g.rit.edu>
+Date:   Sat Apr 18 21:59:08 2026 -0400
+
+    push
+
+commit 00ffffd7225c68e972eb39490b8fd319c65e75ae
+Author: dp1317-2 <dp1317@g.rit.edu>
+Date:   Sat Apr 18 21:52:12 2026 -0400
+
+    push
+
+commit 422c54f7db3634ed26a6ab6a5affbace36cebc78
+Author: dp1317-2 <dp1317@g.rit.edu>
+Date:   Sat Apr 18 21:51:01 2026 -0400
+
+    push
+
+commit 192547026a6518d669dd5414eac207c0c2b5ec5a
+Author: dp1317-2 <dp1317@g.rit.edu>
+Date:   Sat Apr 18 21:48:24 2026 -0400
+
+    push
+
+commit fb9aa153b3fbff14c482bf9e75613f13d546acf8
+Author: dp1317-2 <dp1317@g.rit.edu>
+Date:   Sat Apr 18 21:47:04 2026 -0400
+
+    push
+
+commit 4806e162b6704cc4aac477cb18ca484b9009332e
+Author: dp1317-2 <dp1317@g.rit.edu>
+Date:   Sat Apr 18 21:31:05 2026 -0400
+
+    push
+
+commit f7a052b59bd33b825288fdb4d63ff77b523cbaeb
+Author: dp1317-2 <dp1317@g.rit.edu>
+Date:   Sat Apr 18 21:14:46 2026 -0400
+
+    push
+
+commit bb05719a9b5dec6a11f48b8f397aaa544d8725d1
+Author: dp1317-2 <dp1317@g.rit.edu>
+Date:   Sat Apr 18 21:12:32 2026 -0400
+
+    push
+
 commit 0e888feb904e5edd30f0f10019a21c0fc5c91dcd
 Author: dp1317-2 <dp1317@g.rit.edu>
 Date:   Sat Apr 18 21:12:10 2026 -0400
