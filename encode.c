@@ -9,7 +9,7 @@ int main(int argc, char * argv[]){
 
 
 	if(argc!=2){
-		fprintf(stderr, "usage: encode file-name  # from standard input\n");
+		fprintf(stderr, "usage: encode to-file-name  # from standard input\n");
 		return EXIT_FAILURE;
 	}
 

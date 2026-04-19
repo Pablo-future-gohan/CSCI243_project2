@@ -127,6 +127,10 @@ static block64 * cbc_encrypt( char * text, block64 * pIV, block64 key){
 	}
 	block64 * blockArray = (block64 *) malloc(numBlocks * sizeof(block64));
 
+	if(blockArray == NULL){
+		fprintf(stderr, "Unable to allocate space for array");
+	}
+
 
 	//this loops and encrypts it
 	for(int i=0; i<numBlocks; i++){
@@ -170,6 +174,12 @@ static block64 * cbc_encrypt( char * text, block64 * pIV, block64 key){
 static char * cbc_decrypt( block64 * ciphertext, size_t count, block64 * pIV, block64 key) {	
 
 	char * t = (char *) malloc((count*8 +1)* sizeof(char));
+
+
+	if(t == NULL){
+		fprintf(stderr, "Unable to allocate space for array");
+	}
+
 
 	for(size_t i=0; i<count; i++){
 
