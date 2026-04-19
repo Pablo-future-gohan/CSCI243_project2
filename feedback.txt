@@ -1,0 +1,35 @@
+
+Assignment Feedback
+
+My name is: Daniel Popovich
+My login ID is: dp1317
+
+Assignment name is:
+Project 2: CBC Mode Encryption
+
+
+What did I learn?
+I feel like I learned a lot and not a lot at the same time. Maybe dealing with inputs from the terminal? Maybe just dealing with specific blocks of data? I feel like I learned something but I'm not sure what exactly. 
+
+
+
+
+What was easy/fun about this assignment?
+Nothing was fun about it. I was so confused the entire time. Encrypting/decrypting was a little fun thinking about it conceptually but all in all I did not enjoy this project.
+
+
+
+What gave you problems/troubles?
+The instructions were terrible. I spent so long reading them and trying to figure out what was going on. I had some issues while programming, but most of my struggles were because the instructions were so vague and so poorly worded that I had no idea what was going on. My friend and I had to discuss for a while to understand what was actually going on. 
+
+
+
+What could the instructor do to improve this assignment?
+I feel like this assignment wasn't related to what we did in class. This is a common theme amoung the assignments in this class but I felt it a lot in this assignment. I guess technically the programming we did for this assigmment is the stuff we learned in class but I feel like the reasoning behind our programming was much different. Basically what I'm trying to say is that I feel like we should've had an assignment that doesn't require so much reading to understand what's going on. I feel as though our assignments should focus on making sure we understand what's going on in class, not some other concept like ipv4 or encryption. 
+
+
+
+What would you have liked to do in this assignment?
+N/A. I just want less confusing instructions
+
+

@@ -1,0 +1,53 @@
+commit 2372d3ff61d915a35e6b5170f8f3409da908a1e1
+Author: dp1317-2 <dp1317@g.rit.edu>
+Date:   Sat Apr 18 20:00:26 2026 -0400
+
+    finished the program
+
+commit fa2eae80d021acea7010e61235ac46837a9944d8
+Author: dp1317-2 <dp1317@g.rit.edu>
+Date:   Sat Apr 18 17:44:17 2026 -0400
+
+    fixed a litle error in encode function
+
+commit 566c49d24d34942283ee11623eaa50e264c6cb16
+Author: dp1317-2 <dp1317@g.rit.edu>
+Date:   Sat Apr 18 17:39:27 2026 -0400
+
+    encode function works
+
+commit 89eda56d6a9ffd61267b7af6be380217e75c1174
+Author: dp1317-2 <dp1317@g.rit.edu>
+Date:   Sat Apr 18 16:54:15 2026 -0400
+
+    cbc_decrypt method finished
+
+commit c28f44975a6f8f088abc504de5e659cbb13dd4e5
+Author: dp1317-2 <dp1317@g.rit.edu>
+Date:   Sat Apr 18 14:40:54 2026 -0400
+
+    finished cbc_encrypt functoin
+
+commit 051d15dac2e8cf774d58090fd109c7f5ce79f21d
+Author: dp1317-2 <dp1317@g.rit.edu>
+Date:   Fri Apr 17 17:10:29 2026 -0400
+
+    made the tostring function and started working on cbc_encryption function
+
+commit e520313cdbeb3053b21687bb555be8c351262d0c
+Author: dp1317-2 <dp1317@g.rit.edu>
+Date:   Fri Apr 17 16:15:04 2026 -0400
+
+    block encyrpt and decrytp methods
+
+commit b85591a3d8786b025a89b94de9bf88d5a4966769
+Author: dp1317-2 <dp1317@g.rit.edu>
+Date:   Fri Apr 17 15:57:09 2026 -0400
+
+    left and right barrel roll
+
+commit 017ada9303c29cd02acbf156a2c7362db0092c32
+Author: dp1317-2 <dp1317@g.rit.edu>
+Date:   Fri Apr 17 13:03:36 2026 -0400
+
+    I just made all the functions but none do anything yet
