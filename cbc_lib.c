@@ -221,11 +221,13 @@ int encode(const char * destpath){
 
 
 
-	block64 pIV = INITIALIZATION_VECTOR;
 
 	
 
 	while(fgets(buffer, sizeof(buffer), stdin) != NULL){
+
+
+		block64 pIV = INITIALIZATION_VECTOR;
 
 		int numBlocks = (int) (strlen(buffer)/8) +1;
 
